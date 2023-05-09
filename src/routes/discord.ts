@@ -1,23 +1,20 @@
-import express, { Request, Response, Router } from 'express';
-import { createCard } from '../utils/canvas';
-import fetchDiscord from '../utils/fetchDiscord';
+import express, { Request, Response, Router } from 'express'
+import { createCard } from '../utils/canvas'
+import fetchDiscord from '../utils/fetchDiscord'
 
-const discordCard = Router();
+const discordCard = Router()
 
 discordCard.get('/:id', async (req: Request, res: Response) => {
-    await fetchDiscord(req.params.id).then((user) => {
-        const card = createCard({
-            "height": 880,
-            "width": 1360
+    const user = await fetchDiscord(req.params.id)
+    const card = await createCard(
+        {
+            width: 600,
+            height: 200,
         },
-            user.id
-        )
-        res.contentType("text/html");
-        res.send(`<img src="${card}" alt="image" width="340" height="220">`);
-    });
+        user
+    )
+    res.contentType('text/html')
+    res.send(`<img src="${card}" alt="image" width="300" height="100">`)
 })
 
-export {
-    discordCard,
-}
-
+export { discordCard }

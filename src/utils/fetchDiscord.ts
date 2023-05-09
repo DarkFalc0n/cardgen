@@ -1,30 +1,14 @@
-import Discord, { Client, User } from 'discord.js';
-import * as dotenv from 'dotenv'
+import 'dotenv/config'
+import { Client, User, Snowflake } from 'discord.js'
 
-let user: User;
-
-const fetchDiscord = async (id: string) => {
-    dotenv.config()
-    const client: Client = new Discord.Client({
-        intents: ["Guilds"]
-    });   
-
+let user: User
+const fetchDiscord = async (id: Snowflake) => {
+    const client = new Client({
+        intents: ['Guilds'],
+    })
     client.login(process.env.DISCORD_TOKEN)
-
-    client.on('ready', async() => {        
-        try {
-            console.log("Connected to discord service");            
-            user = await client.users.fetch(
-                id,
-                { force: true }
-            )
-        } catch (err) {
-            console.error(err);
-        }
-        
-    });
-    return user;
+    user = await client.users.fetch(id)
+    return user
 }
-
 
 export default fetchDiscord
