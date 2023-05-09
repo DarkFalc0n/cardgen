@@ -7,7 +7,6 @@ const createCard = async (
 ) => {
     const canvas: Canvas = createCanvas(size.width, size.height)
     const context = canvas.getContext('2d')
-    console.log(user.presence)
     const bgGradient = context.createLinearGradient(
         0,
         0,
