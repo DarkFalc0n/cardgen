@@ -11,6 +11,7 @@
     "build": "tsc -p ."
   },
   "dependencies": {
+    "@discordjs/core": "^0.6.0",
     "@types/express": "^4.17.14",
     "canvas": "^2.11.0",
     "discord.js": "^14.7.1",
