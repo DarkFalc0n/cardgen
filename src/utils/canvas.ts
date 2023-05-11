@@ -1,5 +1,5 @@
 import { createCanvas, Canvas, loadImage } from 'canvas'
-import  { CustomUser } from '../interface/custom'
+import { CustomUser } from '../interface/custom'
 
 const createCard = async (
     size: { width: number; height: number },
@@ -19,11 +19,11 @@ const createCard = async (
     context.fillRect(0, 0, size.width, size.height)
     context.imageSmoothingEnabled = true
     context.fillStyle = '#ffffff'
-    context.font = '40px sans-serif'
+    context.font = '35px sans-serif'
     context.fillText(user.username, 190, 112.5, 250)
     const usernameWidth = context.measureText(user.username).width
     context.fillStyle = '#bdc2ff'
-    context.font = '35px sans-serif'
+    context.font = '30px sans-serif'
     context.fillText(`#${user.discriminator}`, 190 + usernameWidth + 5, 112.5)
 
     const userAvatar = await loadImage(
