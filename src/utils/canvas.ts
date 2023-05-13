@@ -20,8 +20,12 @@ const createCard = async (
     context.imageSmoothingEnabled = true
     context.fillStyle = '#ffffff'
     context.font = '35px sans-serif'
-    context.fillText(user.username, 190, 112.5, 250)
-    const usernameWidth = context.measureText(user.username).width
+    const truncatedUsername =
+        user.username.length > 19
+            ? `${user.username.slice(0, 16)}...`
+            : user.username
+    context.fillText(truncatedUsername, 190, 112.5)
+    const usernameWidth = context.measureText(truncatedUsername).width
     context.fillStyle = '#bdc2ff'
     context.font = '30px sans-serif'
     context.fillText(`#${user.discriminator}`, 190 + usernameWidth + 5, 112.5)

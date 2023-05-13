@@ -6,20 +6,22 @@ import { CustomUser } from '../interface/custom'
 const discordCard = Router()
 
 discordCard.get('/:id', async (req: Request, res: Response) => {
-    const user = await fetchDiscord(req.params.id) as CustomUser
-    const card = await createCard(
-        {
-            width: 600,
-            height: 200,
-        },
-        user
-    )
+    const user = (await fetchDiscord(req.params.id)) as CustomUser
+    const cardSize = {
+        width: 800,
+        height: 200,
+    }
+    const card = await createCard(cardSize, user)
     res.contentType('text/html')
-    res.send(`<img src="${card}" alt="image" width="300" height="100">`)
+    res.send(
+        `<img src="${card}" alt="image" width="${cardSize.width / 2}" height="${
+            cardSize.height / 2
+        }" />`
+    )
 })
 
 discordCard.get('/:id/raw', async (req: Request, res: Response) => {
-    const user = await fetchDiscord(req.params.id) as CustomUser
+    const user = (await fetchDiscord(req.params.id)) as CustomUser
     res.json(user)
 })
 
