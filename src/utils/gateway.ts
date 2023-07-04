@@ -6,6 +6,11 @@ import {
     GatewayIntentBits,
     Client,
 } from '@discordjs/core'
+import { createClient } from 'redis'
+
+export const PresenceStore = createClient({ url: process.env.REDIS_HOST! })
+PresenceStore.connect()
+PresenceStore.on('error', (err) => console.log('Redis Client Error', err))
 
 const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN!)
 const gateway = new WebSocketManager({
@@ -16,15 +21,12 @@ const gateway = new WebSocketManager({
 
 const client = new Client({ rest, gateway })
 
-export const PresenceStore = new Map<string, any>()
-
 client.on(GatewayDispatchEvents.GuildMemberAdd, async (presence: any) => {
-    PresenceStore.set(presence.user.id, presence.activities)
+    PresenceStore.set(presence.user.id, JSON.stringify(presence))
 })
 
 client.on(GatewayDispatchEvents.PresenceUpdate, async ({ data: presence }) => {
-    console.log(presence)
-    PresenceStore.set(presence.user.id, presence)
+    PresenceStore.set(presence.user.id, JSON.stringify(presence))
 })
 
 client.once(GatewayDispatchEvents.Ready, () =>

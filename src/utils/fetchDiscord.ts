@@ -9,7 +9,6 @@ const client = new Client({
 })
 client.login(process.env.DISCORD_TOKEN)
 
-
 client.on('ready', () => {
     console.log('Discord client is ready')
 })
@@ -18,7 +17,7 @@ const fetchDiscord = async (id: Snowflake) => {
     user = await client.users.fetch(id)
     return {
         ...user,
-        presence: PresenceStore.get(user.id)
+        presence: await PresenceStore.get(user.id),
     }
 }
 
