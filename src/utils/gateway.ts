@@ -8,7 +8,13 @@ import {
 } from '@discordjs/core'
 import { createClient } from 'redis'
 
-export const PresenceStore = createClient({ url: process.env.REDIS_HOST! })
+export const PresenceStore = createClient({
+    password: process.env.REDIS_PASSWORD!,
+    socket: {
+        host: process.env.REDIS_HOST!,
+        port: 13598,
+    },
+})
 PresenceStore.connect()
 PresenceStore.on('error', (err) => console.log('Redis Client Error', err))
 

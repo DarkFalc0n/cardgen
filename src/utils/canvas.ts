@@ -1,7 +1,6 @@
 import { createCanvas, Canvas, loadImage } from 'canvas'
 import { CustomUser } from '../interface/custom'
 import discordFlags from './discordFlags'
-import { parse } from 'dotenv'
 import { parseActivities } from './discordActivityParser'
 
 const getFlags = async (flagBits: number) => {
