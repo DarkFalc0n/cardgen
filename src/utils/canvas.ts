@@ -26,7 +26,6 @@ const createCard = async (
     },
     user: CustomUser
 ) => {
-    console.log(user)
     const cornerRadius = 30
     const canvas: Canvas = createCanvas(style.width, style.height)
     const context = canvas.getContext('2d')
@@ -136,11 +135,13 @@ const createCard = async (
                 let parsedActivities = parseActivities(
                     presenceObject.activities
                 )
+                console.log('parsedActivities', parsedActivities)
                 if (parsedActivities.length > 0) {
                     if (parsedActivities[0].type === 'Custom Status') {
                         let customStatus = parsedActivities.shift()
                         if (customStatus?.emoji) {
                             const emoji = await loadImage(customStatus.emoji)
+                            console.log('loaded custom emoji')
                             context.drawImage(emoji, 190, 127.5, 30, 30)
                         }
                         if (customStatus?.state) {

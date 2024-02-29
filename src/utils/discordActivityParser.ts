@@ -1,4 +1,5 @@
 import { emojiUnicode } from './emojiParser'
+
 interface IParsedActivity {
     type: string
     details?: string
@@ -9,6 +10,7 @@ interface IParsedActivity {
     largeAssetURL?: string
     smallAssetURL?: string
 }
+
 export const parseActivities = (activities: any[]) => {
     let parsedActivities: IParsedActivity[] = []
     for (let i = 0; i < activities.length; i++) {
@@ -22,11 +24,12 @@ export const parseActivities = (activities: any[]) => {
                 priority: 2,
             }
             if (activity.application_id) {
+                console.log(activity.assets)
                 if (activity.assets.large_image) {
-                    currentActivity.largeAssetURL = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png`
+                    currentActivity.largeAssetURL = `https://media.discordapp.net/${activity.assets.large_image.slice(3)}`
                 }
                 if (activity.assets.small_image) {
-                    currentActivity.smallAssetURL = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.small_image}.png`
+                    currentActivity.smallAssetURL = `https://media.discordapp.net/${activity.assets.small_image.slice(3)}`
                 }
             }
             parsedActivities.push(currentActivity)
@@ -84,6 +87,5 @@ export const parseActivities = (activities: any[]) => {
     parsedActivities.sort((a, b) => {
         return a.priority - b.priority
     })
-    console.log(parsedActivities)
     return parsedActivities
 }

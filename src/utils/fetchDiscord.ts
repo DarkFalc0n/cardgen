@@ -1,23 +1,17 @@
 import 'dotenv/config'
-import { Client, User, Snowflake } from 'discord.js'
-import { PresenceStore } from './gateway'
-
-let user: User
-
-const client = new Client({
-    intents: ['Guilds', 'GuildPresences'],
-})
-client.login(process.env.DISCORD_TOKEN)
-
-client.on('ready', () => {
-    console.log('Discord client is ready')
-})
+import { User, Snowflake } from 'discord.js'
+import { PresenceStore, DiscordClient } from './clientConfig'
 
 const fetchDiscord = async (id: Snowflake) => {
-    user = await client.users.fetch(id)
+    let user = await DiscordClient.users.fetch(id)
+    let presence = await PresenceStore.get(user.id)
+    console.log('Got user from id', {
+        ...user,
+        presence: JSON.parse(presence!),
+    })
     return {
         ...user,
-        presence: await PresenceStore.get(user.id),
+        presence,
     }
 }
 

@@ -3,8 +3,17 @@ import { createCard } from '../utils/canvas'
 import fetchDiscord from '../utils/fetchDiscord'
 import { CustomUser } from '../interface/custom'
 import { discordCardSize } from '../utils/cardSizeHelper'
+import {
+    startDiscordClient,
+    startDiscordGateway,
+    startPresenceStore,
+} from '../utils/clientConfig'
 
 const discordCard = Router()
+
+startDiscordClient()
+startDiscordGateway()
+startPresenceStore()
 
 discordCard.get('/:id', async (req: Request, res: Response) => {
     const user = (await fetchDiscord(req.params.id)) as CustomUser
