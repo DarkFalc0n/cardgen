@@ -1,0 +1,17 @@
+{
+    "name": "cardgen-discord-presence",
+    "version": "0.0.1",
+    "main": "index.js",
+    "repository": "https://github.com/DarkFalc0n/cardgen",
+    "author": "DarkFalc0n <pratyayroy20@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "dev": "ts-node src/index.ts",
+        "start": "node dist/index.js",
+        "build": "tsc -p ."
+    },
+    "keywords": [],
+    "devDependencies": {
+        "ts-node": "^10.9.2"
+    }
+}
