@@ -13,8 +13,8 @@ interface IParsedActivity {
 
 export const parseActivities = (activities: any[]) => {
     let parsedActivities: IParsedActivity[] = []
-    for (let i = 0; i < activities.length; i++) {
-        const activity = activities[i]
+    for (const element of activities) {
+        const activity = element
         if (activity.type === 0) {
             let currentActivity: IParsedActivity = {
                 details: activity.details,

@@ -35,7 +35,7 @@ const createCard = async (
         style.width,
         style.height
     )
-    bgGradient.addColorStop(0, `#000000`)
+    bgGradient.addColorStop(0, '#fff')
     bgGradient.addColorStop(1, '#434343')
     context.fillStyle = bgGradient
     context.beginPath()
